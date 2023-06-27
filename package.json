@@ -1,0 +1,16 @@
+{
+  "name": "veux-examples",
+  "version": "0.1.0",
+  "type": "module",
+  "imports": {
+    "#veux": "../veux/src/index.js"
+  },
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^4.3.9"
+  }
+}

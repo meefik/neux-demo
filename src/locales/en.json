@@ -1,0 +1,28 @@
+{
+  "languages": {
+    "en": "English",
+    "ru": "Русский"
+  },
+  "title": "Menu",
+  "menu": {
+    "todo": "To Do",
+    "xogame": "XO Game"
+  },
+  "error": {
+    "notfound": "Not found"
+  },
+  "todo": {
+    "title": "To Do",
+    "input": "Enter your task...",
+    "mark_all": "Mark all as complete",
+    "total": "Total tasks: %{count}",
+    "filter": {
+      "all": "All",
+      "active": "Active",
+      "completed": "Completed"
+    }
+  },
+  "xogame": {
+    "title": "XO Game"
+  }
+}

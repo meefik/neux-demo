@@ -1,0 +1,96 @@
+import { createState } from '#veux';
+import css from './styles/xogame.module.css';
+import l10n from './l10n';
+
+const SIZE = 5;
+
+export default function () {
+  const state = createState({
+    current: '',
+    matrix: createMatrix(SIZE)
+  });
+  return {
+    children: [{
+      tagName: 'h1',
+      textContent: () => l10n.t('xogame.title')
+    }, {
+      className: css.matrix,
+      style: {
+        gridTemplateColumns: Array(SIZE).fill('64px').join(' ')
+      },
+      children: () => {
+        return state.matrix.$each(line => {
+          return {
+            children: () => {
+              return line.$each((point) => {
+                return {
+                  className: css.point,
+                  style: {
+                    color: () => point.mark === 'x' ? 'red' : 'blue',
+                    backgroundColor: () => point.win ? 'yellow' : ''
+                  },
+                  textContent: () => point.mark,
+                  on: {
+                    click: () => {
+                      if (!point.mark && !state.win) {
+                        state.current = state.current === 'x' ? 'o' : 'x';
+                        point.mark = state.current;
+                        if (checkMatrix(state.matrix)) state.win = true;
+                      }
+                    }
+                  }
+                };
+              });
+            }
+          };
+        });
+      }
+    }]
+  };
+}
+
+function createMatrix(size) {
+  return Array(size).fill(0).map(() =>
+    Array(size).fill(0).map(() => ({}))
+  );
+}
+
+function checkLine(line) {
+  let match = true;
+  let mark = line[0].mark;
+  for (let i = 0; i < line.length; i++) {
+    if (!line[i].mark || line[i].mark !== mark) {
+      match = false;
+      break;
+    }
+  }
+  return match;
+}
+
+function markWin(line) {
+  for (let i = 0; i < line.length; i++) {
+    line[i].win = true;
+  }
+  return true;
+}
+
+function checkMatrix(matrix) {
+  const diagonal1 = [];
+  const diagonal2 = [];
+  const inverted = createMatrix(matrix.length);
+  for (let i = 0; i < matrix.length; i++) {
+    const column = matrix[i];
+    if (checkLine(column)) return markWin(column);
+    diagonal1.push(column[i]);
+    diagonal2.push(column[column.length - i - 1]);
+    for (let j = 0; j < column.length; j++) {
+      inverted[j][i] = column[j];
+    }
+  }
+  if (checkLine(diagonal1)) return markWin(diagonal1);
+  if (checkLine(diagonal2)) return markWin(diagonal2);
+  for (let i = 0; i < inverted.length; i++) {
+    const column = inverted[i];
+    if (checkLine(column)) return markWin(column);
+  }
+}

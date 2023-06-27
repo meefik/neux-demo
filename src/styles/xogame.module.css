@@ -1,0 +1,13 @@
+.matrix {
+  display: grid;
+}
+
+.point {
+  cursor: pointer;
+  width: 64px;
+  height: 64px;
+  border: 1px solid gray;
+  font-size: 48px;
+  text-align: center;
+  font-family: monospace;
+}

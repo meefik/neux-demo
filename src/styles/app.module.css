@@ -1,0 +1,28 @@
+.header {
+  margin-bottom: 20px;
+  padding-bottom: 5px;
+  border-bottom: 1px dashed gray;
+}
+
+.header > :nth-child(n) {
+  margin-right: 10px;
+}
+
+.content {
+  display: block;
+}
+
+.footer {
+  margin-top: 20px;
+  padding-top: 5px;
+  border-top: 1px dashed gray;
+}
+
+.footer .active {
+  background-color: yellow;
+}
+
+.footer .path {
+  margin: 0 10px;
+  color: gray;
+}
