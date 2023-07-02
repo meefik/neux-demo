@@ -1,0 +1,23 @@
+.matrix {
+  display: grid;
+}
+
+.point {
+  cursor: pointer;
+  width: 64px;
+  height: 64px;
+  border: 1px solid gray;
+  font-size: 24px;
+  font-family: monospace;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.point:hover {
+  background-color: yellow;
+}
+
+.matrix[data-win="true"] .point {
+  background-color: yellow;
+}

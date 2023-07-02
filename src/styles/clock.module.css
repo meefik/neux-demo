@@ -1,0 +1,23 @@
+.clock {
+  display: block;
+  margin: 20px;
+}
+
+.clock svg {
+  display: block;
+  width: 200px;
+  height: 200px;
+}
+
+.subsecond {
+  color: silver;
+}
+
+.hour,
+.minute {
+  color: black;
+}
+
+.second {
+  color: tomato;
+}

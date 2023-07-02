@@ -1,0 +1,12 @@
+.form {
+  display: block;
+}
+
+.form label {
+  display: inline-block;
+  width: 100px;
+}
+
+.form > div {
+  margin: 5px 0;
+}

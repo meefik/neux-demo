@@ -1,6 +1,6 @@
 import { createState } from '#veux';
-import css from './styles/xogame.module.css';
-import l10n from './l10n';
+import css from '../styles/tictactoe.module.css';
+import l10n from '../l10n';
 
 const SIZE = 5;
 
@@ -11,9 +11,6 @@ export default function () {
   });
   return {
     children: [{
-      tagName: 'h1',
-      textContent: () => l10n.t('xogame.title')
-    }, {
       className: css.matrix,
       style: {
         gridTemplateColumns: Array(SIZE).fill('64px').join(' ')

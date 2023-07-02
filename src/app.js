@@ -2,8 +2,12 @@ import { createView } from '#veux';
 import css from './styles/app.module.css';
 import l10n from './l10n';
 import router from './router';
-import Todo from './todo';
-import XoGame from './xogame';
+import Todo from './views/todo';
+import TicTacToe from './views/tictactoe';
+import Puzzle from './views/puzzle';
+import Clock from './views/clock';
+import Sketch from './views/sketch';
+import Form from './views/form';
 
 createView({
   children: [{
@@ -17,19 +21,28 @@ createView({
       textContent: () => l10n.t('menu.todo')
     }, {
       tagName: 'a',
-      href: '#xogame',
-      textContent: () => l10n.t('menu.xogame')
+      href: '#tictactoe',
+      textContent: () => l10n.t('menu.tictactoe')
     }, {
       tagName: 'a',
-      href: '#',
-      textContent: () => l10n.t('menu.page'),
-      on: {
-        click: (e) => {
-          e.preventDefault();
-          router.show('#page', { param1: '1', param2: '2' });
-        }
-      }
+      href: '#puzzle',
+      textContent: () => l10n.t('menu.puzzle')
+    }, {
+      tagName: 'a',
+      href: '#clock',
+      textContent: () => l10n.t('menu.clock')
+    }, {
+      tagName: 'a',
+      href: '#sketch',
+      textContent: () => l10n.t('menu.sketch')
+    }, {
+      tagName: 'a',
+      href: '#form',
+      textContent: () => l10n.t('menu.form')
     }]
+  }, {
+    tagName: 'h1',
+    textContent: () => l10n.t(`menu.${router.path.slice(1)}`)
   }, {
     className: css.content,
     children: () => {
@@ -38,9 +51,25 @@ createView({
           return {
             view: Todo
           };
-        case '#xogame':
+        case '#tictactoe':
           return {
-            view: XoGame
+            view: TicTacToe
+          };
+        case '#puzzle':
+          return {
+            view: Puzzle
+          };
+        case '#clock':
+          return {
+            view: Clock
+          };
+        case '#sketch':
+          return {
+            view: Sketch
+          };
+        case '#form':
+          return {
+            view: Form
           };
         default:
           return [{

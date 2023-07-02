@@ -6,13 +6,16 @@
   "title": "Menu",
   "menu": {
     "todo": "To Do",
-    "xogame": "XO Game"
+    "tictactoe": "Tic-Tac-Toe",
+    "puzzle": "15 Puzzle",
+    "clock": "Clock",
+    "sketch": "Sketch",
+    "form": "Form"
   },
   "error": {
     "notfound": "Not found"
   },
   "todo": {
-    "title": "To Do",
     "input": "Enter your task...",
     "mark_all": "Mark all as complete",
     "total": "Total tasks: %{count}",
@@ -22,7 +25,7 @@
       "completed": "Completed"
     }
   },
-  "xogame": {
-    "title": "XO Game"
+  "puzzle": {
+    "movies": "Movies: %{count}"
   }
 }

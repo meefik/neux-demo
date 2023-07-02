@@ -1,6 +1,7 @@
 import { createState } from '#veux';
-import l10n from './l10n';
-import router from './router';
+import css from '../styles/todo.module.css';
+import l10n from '../l10n';
+import router from '../router';
 
 function store(state, changes) {
   if (changes) {
@@ -16,9 +17,6 @@ export default function Todo() {
   state.list.$sync(store);
   return {
     children: [{
-      tagName: 'h1',
-      textContent: () => l10n.t('todo.title')
-    }, {
       tagName: 'input',
       placeholder: () => l10n.t('todo.input'),
       autofocus: true,
@@ -73,6 +71,7 @@ export default function Todo() {
       },
     }, {
       tagName: 'ul',
+      className: css.list,
       children: () => {
         const filter = router.params.filter;
         return state.list.$each(item => {

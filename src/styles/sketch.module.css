@@ -1,0 +1,14 @@
+.matrix {
+  display: grid;
+}
+
+.cell {
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  border: 1px solid gray;
+}
+
+.input {
+  margin-bottom: 10px;
+}
