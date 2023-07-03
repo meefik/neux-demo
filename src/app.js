@@ -8,6 +8,17 @@ import Puzzle from './views/puzzle';
 import Clock from './views/clock';
 import Sketch from './views/sketch';
 import Form from './views/form';
+import Scoreboard from './views/scoreboard';
+
+const views = {
+  todo: Todo,
+  tictactoe: TicTacToe,
+  puzzle: Puzzle,
+  clock: Clock,
+  sketch: Sketch,
+  form: Form,
+  scoreboard: Scoreboard
+};
 
 createView({
   children: [{
@@ -15,67 +26,29 @@ createView({
     children: [{
       tagName: 'span',
       textContent: () => l10n.t('title')
-    }, {
-      tagName: 'a',
-      href: '#todo',
-      textContent: () => l10n.t('menu.todo')
-    }, {
-      tagName: 'a',
-      href: '#tictactoe',
-      textContent: () => l10n.t('menu.tictactoe')
-    }, {
-      tagName: 'a',
-      href: '#puzzle',
-      textContent: () => l10n.t('menu.puzzle')
-    }, {
-      tagName: 'a',
-      href: '#clock',
-      textContent: () => l10n.t('menu.clock')
-    }, {
-      tagName: 'a',
-      href: '#sketch',
-      textContent: () => l10n.t('menu.sketch')
-    }, {
-      tagName: 'a',
-      href: '#form',
-      textContent: () => l10n.t('menu.form')
-    }]
+    }].concat(Object.keys(views).map(view => {
+      return {
+        tagName: 'a',
+        href: `#${view}`,
+        textContent: () => l10n.t(`menu.${view}`)
+      };
+    }))
   }, {
     tagName: 'h1',
     textContent: () => l10n.t(`menu.${router.path.slice(1)}`)
   }, {
     className: css.content,
     children: () => {
-      switch (router.path) {
-        case '#todo':
-          return {
-            view: Todo
-          };
-        case '#tictactoe':
-          return {
-            view: TicTacToe
-          };
-        case '#puzzle':
-          return {
-            view: Puzzle
-          };
-        case '#clock':
-          return {
-            view: Clock
-          };
-        case '#sketch':
-          return {
-            view: Sketch
-          };
-        case '#form':
-          return {
-            view: Form
-          };
-        default:
-          return [{
-            tagName: 'p',
-            textContent: () => l10n.t('error.notfound')
-          }];
+      const View = views[router.path.slice(1)];
+      if (View) {
+        return {
+          view: View
+        };
+      } else {
+        return {
+          tagName: 'p',
+          textContent: () => l10n.t('error.notfound')
+        };
       }
     }
   }, {

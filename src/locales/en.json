@@ -10,7 +10,8 @@
     "puzzle": "15 Puzzle",
     "clock": "Clock",
     "sketch": "Sketch",
-    "form": "Form"
+    "form": "Form",
+    "scoreboard": "Scoreboard"
   },
   "error": {
     "notfound": "Not found"

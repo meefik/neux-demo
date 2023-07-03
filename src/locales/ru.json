@@ -6,7 +6,8 @@
     "puzzle": "Пятнашки",
     "clock": "Часы",
     "sketch": "Эскиз",
-    "form": "Форма"
+    "form": "Форма",
+    "scoreboard": "Табло"
   },
   "error": {
     "notfound": "Не найдено"
