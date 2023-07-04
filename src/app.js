@@ -60,7 +60,7 @@ createView({
         textContent: () => l10n.t(`languages.${lang}`, 'en'),
         on: {
           click: () => {
-            l10n.$lang = lang;
+            l10n.lang = lang;
           }
         }
       };

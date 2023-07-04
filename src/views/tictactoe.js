@@ -29,9 +29,9 @@ export default function () {
                   on: {
                     click: () => {
                       if (!cell.mark && !state.win) {
-                        state.$current = state.current === 'x' ? 'o' : 'x';
-                        cell.$mark = state.current;
-                        if (checkMatrix(state.matrix)) state.$win = true;
+                        state.current = state.current === 'x' ? 'o' : 'x';
+                        cell.mark = state.current;
+                        if (checkMatrix(state.matrix)) state.win = true;
                       }
                     }
                   }
@@ -65,7 +65,7 @@ function checkLine(line) {
 
 function markWin(line) {
   for (let i = 0; i < line.length; i++) {
-    line[i].$win = true;
+    line[i].win = true;
   }
   return true;
 }

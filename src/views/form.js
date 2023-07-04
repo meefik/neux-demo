@@ -25,7 +25,7 @@ export default function () {
         name: 'text',
         on: {
           input: (e) => {
-            state.$text = e.target.value;
+            state.text = e.target.value;
           }
         }
       }]
@@ -39,7 +39,7 @@ export default function () {
         name: 'password',
         on: {
           input: (e) => {
-            state.$password = e.target.value;
+            state.password = e.target.value;
           }
         }
       }]
@@ -53,7 +53,7 @@ export default function () {
         name: 'color',
         on: {
           input: (e) => {
-            state.$color = e.target.value;
+            state.color = e.target.value;
           }
         }
       }]
@@ -67,7 +67,7 @@ export default function () {
         name: 'date',
         on: {
           input: (e) => {
-            state.$date = e.target.value;
+            state.date = e.target.value;
           }
         }
       }]
@@ -81,7 +81,7 @@ export default function () {
         name: 'time',
         on: {
           input: (e) => {
-            state.$time = e.target.value;
+            state.time = e.target.value;
           }
         }
       }]
@@ -95,7 +95,7 @@ export default function () {
         name: 'range',
         on: {
           input: (e) => {
-            state.$range = e.target.value;
+            state.range = e.target.value;
           }
         }
       }]
@@ -109,7 +109,7 @@ export default function () {
         name: 'number',
         on: {
           input: (e) => {
-            state.$number = e.target.value;
+            state.number = e.target.value;
           }
         }
       }]
@@ -123,7 +123,7 @@ export default function () {
         name: 'checkbox',
         on: {
           input: (e) => {
-            state.$checkbox = e.target.checked;
+            state.checkbox = e.target.checked;
           }
         }
       }]
@@ -138,7 +138,7 @@ export default function () {
         on: {
           input: (e) => {
             if (e.target.checked) {
-              state.$radio = 1;
+              state.radio = 1;
             }
           }
         }
@@ -154,7 +154,7 @@ export default function () {
         on: {
           input: (e) => {
             if (e.target.checked) {
-              state.$radio = 2;
+              state.radio = 2;
             }
           }
         }

@@ -9,7 +9,7 @@ export default function() {
       { name: 'Jenny', score: 3, color: 'yellow' },
       { name: 'David', score: 4, color: 'green' }
     ],
-    $sorted: (obj) => {
+    sorted: (obj) => {
       const arr = obj.$list.slice();
       arr.sort((a, b) => a.score > b.score ? 1 : -1);
       return arr;
@@ -28,7 +28,7 @@ export default function() {
           scores.forEach((v, i) => {
             state.list[i].score = v;
           });
-          state.$('list');
+          state.$$emit('list');
         }, 3000);
       },
       removed: () => {

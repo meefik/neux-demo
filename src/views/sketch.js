@@ -4,7 +4,7 @@ import css from '../styles/sketch.module.css';
 export default function () {
   const state = createState({
     size: 15,
-    $matrix: (obj) => createMatrix(obj.$size)
+    matrix: (obj) => createMatrix(obj.$size)
   });
   return {
     children: [{
@@ -18,7 +18,7 @@ export default function () {
       },
       on: {
         change: (e) => {
-          state.$size = parseInt(e.target.value || 0);
+          state.size = parseInt(e.target.value || 0);
         }
       }
     }, {

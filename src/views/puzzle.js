@@ -35,11 +35,11 @@ export default function () {
                   const newv = state.matrix[i];
                   state.matrix[i] = oldv;
                   state.matrix[sel] = newv;
-                  state.$selected = null;
-                  state.$movies++;
-                  state.$win = checkWin(state.matrix);
+                  state.selected = null;
+                  state.movies++;
+                  state.win = checkWin(state.matrix);
                 } else {
-                  state.$selected = i;
+                  state.selected = i;
                 }
               }
             }

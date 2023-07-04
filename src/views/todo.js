@@ -24,7 +24,7 @@ export default function Todo() {
         keyup: (e) => {
           if (e.keyCode === 13) {
             e.preventDefault();
-            state.list.$push({
+            state.list.push({
               id: `${Date.now()}`,
               text: e.target.value
             });
@@ -42,7 +42,7 @@ export default function Todo() {
           change: (e) => {
             const checked = e.target.checked;
             state.list.forEach((item) => {
-              item.$checked = checked;
+              item.checked = checked;
             });
             state.list.$$sync();
           }
@@ -87,7 +87,7 @@ export default function Todo() {
               checked: () => item.$checked,
               on: {
                 change: (e) => {
-                  item.$checked = e.target.checked;
+                  item.checked = e.target.checked;
                   state.list.$$sync();
                 }
               }
@@ -104,18 +104,18 @@ export default function Todo() {
                         e.target.focus();
                       },
                       input: (e) => {
-                        item.$text = e.target.value;
+                        item.text = e.target.value;
                       },
                       change: () => {
                         state.list.$$sync();
                       },
                       blur: () => {
-                        item.$editable = false;
+                        item.editable = false;
                       },
                       keydown: (e) => {
                         if (e.keyCode === 13) {
                           e.preventDefault();
-                          item.$editable = false;
+                          item.editable = false;
                         }
                       },
                     },
@@ -127,14 +127,14 @@ export default function Todo() {
                         item.$checked ? 'line-through' : 'none',
                     },
                     // style: () => {
-                    //   return item.checked
+                    //   return item.$checked
                     //     ? { textDecoration: "line-through" }
                     //     : { textDecoration: "none" };
                     // },
                     textContent: () => item.text,
                     on: {
                       dblclick: () => {
-                        item.$editable = true;
+                        item.editable = true;
                       },
                     }
                   };
@@ -147,7 +147,7 @@ export default function Todo() {
                 click: (e) => {
                   e.preventDefault();
                   const index = state.list.indexOf(item);
-                  state.list.$splice(index, 1);
+                  state.list.splice(index, 1);
                   state.list.$$sync();
                 }
               }
