@@ -2,7 +2,7 @@
   display: grid;
 }
 
-.point {
+.cell {
   cursor: pointer;
   width: 64px;
   height: 64px;

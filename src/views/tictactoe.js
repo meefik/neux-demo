@@ -1,6 +1,5 @@
 import { createState } from '#veux';
 import css from '../styles/tictactoe.module.css';
-import l10n from '../l10n';
 
 const SIZE = 5;
 
@@ -16,23 +15,23 @@ export default function () {
         gridTemplateColumns: Array(SIZE).fill('64px').join(' ')
       },
       children: () => {
-        return state.matrix.$each(line => {
+        return state.matrix.$$each(line => {
           return {
             children: () => {
-              return line.$each((point) => {
+              return line.$$each((cell) => {
                 return {
-                  className: css.point,
+                  className: css.cell,
                   style: {
-                    color: () => point.mark === 'x' ? 'red' : 'blue',
-                    backgroundColor: () => point.win ? 'yellow' : ''
+                    color: () => cell.$mark === 'x' ? 'red' : 'blue',
+                    backgroundColor: () => cell.$win ? 'yellow' : ''
                   },
-                  textContent: () => point.mark,
+                  textContent: () => cell.$mark,
                   on: {
                     click: () => {
-                      if (!point.mark && !state.win) {
-                        state.current = state.current === 'x' ? 'o' : 'x';
-                        point.mark = state.current;
-                        if (checkMatrix(state.matrix)) state.win = true;
+                      if (!cell.mark && !state.win) {
+                        state.$current = state.current === 'x' ? 'o' : 'x';
+                        cell.$mark = state.current;
+                        if (checkMatrix(state.matrix)) state.$win = true;
                       }
                     }
                   }
@@ -66,7 +65,7 @@ function checkLine(line) {
 
 function markWin(line) {
   for (let i = 0; i < line.length; i++) {
-    line[i].win = true;
+    line[i].$win = true;
   }
   return true;
 }

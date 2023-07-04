@@ -1,10 +1,6 @@
 import { createState } from '#veux';
 import css from '../styles/scoreboard.module.css';
 
-window.state = createState({
-  list: [1,2,3]
-});
-
 export default function() {
   const state = createState({
     list: [
@@ -13,9 +9,8 @@ export default function() {
       { name: 'Jenny', score: 3, color: 'yellow' },
       { name: 'David', score: 4, color: 'green' }
     ],
-    sorted: (obj) => {
-      console.log('sorted')
-      const arr = obj.list.$clone();
+    $sorted: (obj) => {
+      const arr = obj.$list.slice();
       arr.sort((a, b) => a.score > b.score ? 1 : -1);
       return arr;
     }
@@ -33,8 +28,7 @@ export default function() {
           scores.forEach((v, i) => {
             state.list[i].score = v;
           });
-          console.log('aaa')
-          state.$emit('sorted');
+          state.$('list');
         }, 3000);
       },
       removed: () => {
@@ -42,7 +36,7 @@ export default function() {
       }
     },
     children: () => {
-      return state.sorted.$each(item => {
+      return state.$sorted.map(item => {
         return {
           tagName: 'li',
           children: [{
@@ -51,10 +45,10 @@ export default function() {
               backgroundColor: item.color,
               marginRight: '10px'
             },
-            textContent: () => `${item.score}.`
+            textContent: `${item.score}.`
           }, {
             tagName: 'span',
-            textContent: () => item.name
+            textContent: item.name
           }]
         };
       });

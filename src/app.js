@@ -35,11 +35,11 @@ createView({
     }))
   }, {
     tagName: 'h1',
-    textContent: () => l10n.t(`menu.${router.path.slice(1)}`)
+    textContent: () => l10n.t(`menu.${router.$path.slice(1)}`)
   }, {
     className: css.content,
     children: () => {
-      const View = views[router.path.slice(1)];
+      const View = views[router.$path.slice(1)];
       if (View) {
         return {
           view: View
@@ -56,18 +56,18 @@ createView({
     children: Object.keys(l10n.t('languages', 'en')).map(lang => {
       return {
         tagName: 'button',
-        className: () => l10n.lang === lang ? css.active : '',
+        className: () => l10n.$lang === lang ? css.active : '',
         textContent: () => l10n.t(`languages.${lang}`, 'en'),
         on: {
           click: () => {
-            l10n.lang = lang;
+            l10n.$lang = lang;
           }
         }
       };
     }).concat({
       tagName: 'span',
       className: css.path,
-      textContent: () => router.path
+      textContent: () => router.$path
     })
   }]
 }, document.body);

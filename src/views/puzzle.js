@@ -18,12 +18,12 @@ export default function () {
         gridTemplateColumns: Array(SIZE).fill('64px').join(' ')
       },
       dataset: {
-        win: () => state.win
+        win: () => state.$win
       },
       children: () => {
-        return state.matrix.$each((v, i) => {
+        return state.matrix.$$each((v, i) => {
           return {
-            className: css.point,
+            className: css.cell,
             textContent: v,
             on: {
               click: () => {
@@ -35,11 +35,11 @@ export default function () {
                   const newv = state.matrix[i];
                   state.matrix[i] = oldv;
                   state.matrix[sel] = newv;
-                  state.selected = null;
-                  state.movies++;
-                  state.win = checkWin(state.matrix);
+                  state.$selected = null;
+                  state.$movies++;
+                  state.$win = checkWin(state.matrix);
                 } else {
-                  state.selected = i;
+                  state.$selected = i;
                 }
               }
             }
@@ -47,7 +47,7 @@ export default function () {
         });
       }
     }, {
-      textContent: () => l10n.t('puzzle.movies', { count: state.movies })
+      textContent: () => l10n.t('puzzle.movies', { count: state.$movies })
     }]
   };
 }

@@ -14,7 +14,7 @@ export default function Todo() {
   const state = createState({
     list: []
   });
-  state.list.$sync(store);
+  state.list.$$sync(store);
   return {
     children: [{
       tagName: 'input',
@@ -24,12 +24,12 @@ export default function Todo() {
         keyup: (e) => {
           if (e.keyCode === 13) {
             e.preventDefault();
-            state.list.push({
+            state.list.$push({
               id: `${Date.now()}`,
               text: e.target.value
             });
             e.target.value = '';
-            state.list.$sync();
+            state.list.$$sync();
           }
         },
       }
@@ -42,9 +42,9 @@ export default function Todo() {
           change: (e) => {
             const checked = e.target.checked;
             state.list.forEach((item) => {
-              item.checked = checked;
+              item.$checked = checked;
             });
-            state.list.$sync();
+            state.list.$$sync();
           }
         }
       }, {
@@ -61,7 +61,7 @@ export default function Todo() {
             style: {
               padding: '0 2px',
               color: () => {
-                const filter = router.params.filter;
+                const filter = router.params.$filter;
                 return (!filter && item === 'all') || filter === item ? 'red' : '';
               },
             },
@@ -73,8 +73,8 @@ export default function Todo() {
       tagName: 'ul',
       className: css.list,
       children: () => {
-        const filter = router.params.filter;
-        return state.list.$each(item => {
+        const filter = router.params.$filter;
+        return state.list.$$each(item => {
           if (filter && filter !== 'all') {
             if (item.checked && filter !== 'completed') return;
             if (!item.checked && filter !== 'active') return;
@@ -84,17 +84,17 @@ export default function Todo() {
             children: [{
               tagName: 'input',
               type: 'checkbox',
-              checked: () => item.checked,
+              checked: () => item.$checked,
               on: {
                 change: (e) => {
-                  item.checked = e.target.checked;
-                  state.list.$sync();
+                  item.$checked = e.target.checked;
+                  state.list.$$sync();
                 }
               }
             }, {
               tagName: 'span',
               children: () => {
-                return item.editable
+                return item.$editable
                   ? {
                     tagName: 'input',
                     type: 'text',
@@ -104,18 +104,18 @@ export default function Todo() {
                         e.target.focus();
                       },
                       input: (e) => {
-                        item.text = e.target.value;
+                        item.$text = e.target.value;
                       },
                       change: () => {
-                        state.list.$sync();
+                        state.list.$$sync();
                       },
                       blur: () => {
-                        item.editable = false;
+                        item.$editable = false;
                       },
                       keydown: (e) => {
                         if (e.keyCode === 13) {
                           e.preventDefault();
-                          item.editable = false;
+                          item.$editable = false;
                         }
                       },
                     },
@@ -124,7 +124,7 @@ export default function Todo() {
                     tagName: 'label',
                     style: {
                       textDecoration: () =>
-                        item.checked ? 'line-through' : 'none',
+                        item.$checked ? 'line-through' : 'none',
                     },
                     // style: () => {
                     //   return item.checked
@@ -134,7 +134,7 @@ export default function Todo() {
                     textContent: () => item.text,
                     on: {
                       dblclick: () => {
-                        item.editable = true;
+                        item.$editable = true;
                       },
                     }
                   };
@@ -147,8 +147,8 @@ export default function Todo() {
                 click: (e) => {
                   e.preventDefault();
                   const index = state.list.indexOf(item);
-                  state.list.splice(index, 1);
-                  state.list.$sync();
+                  state.list.$splice(index, 1);
+                  state.list.$$sync();
                 }
               }
             }]
@@ -156,7 +156,7 @@ export default function Todo() {
         });
       }
     }, {
-      textContent: () => l10n.t('todo.total', { count: state.list.length })
+      textContent: () => l10n.t('todo.total', { count: state.list.$length })
     }]
   };
 }
