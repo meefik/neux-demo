@@ -7,7 +7,7 @@
     "clock": "Часы",
     "sketch": "Эскиз",
     "form": "Форма",
-    "scoreboard": "Табло"
+    "table": "Таблица"
   },
   "error": {
     "notfound": "Не найдено"
@@ -24,5 +24,10 @@
   },
   "puzzle": {
     "movies": "Перемещений: %{count}"
+  },
+  "table": {
+    "search": "Найти текст...",
+    "text": "Текст",
+    "checked": "Флаг"
   }
 }

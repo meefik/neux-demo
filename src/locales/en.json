@@ -11,7 +11,7 @@
     "clock": "Clock",
     "sketch": "Sketch",
     "form": "Form",
-    "scoreboard": "Scoreboard"
+    "table": "Table"
   },
   "error": {
     "notfound": "Not found"
@@ -28,5 +28,10 @@
   },
   "puzzle": {
     "movies": "Movies: %{count}"
+  },
+  "table": {
+    "search": "Search text...",
+    "text": "Text",
+    "checked": "Flag"
   }
 }

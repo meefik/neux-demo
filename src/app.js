@@ -8,7 +8,7 @@ import Puzzle from './views/puzzle';
 import Clock from './views/clock';
 import Sketch from './views/sketch';
 import Form from './views/form';
-import Scoreboard from './views/scoreboard';
+import Table from './views/table';
 
 const views = {
   todo: Todo,
@@ -17,7 +17,7 @@ const views = {
   clock: Clock,
   sketch: Sketch,
   form: Form,
-  scoreboard: Scoreboard
+  table: Table
 };
 
 createView({

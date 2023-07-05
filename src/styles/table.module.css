@@ -1,0 +1,10 @@
+.table {
+  border: 1px solid;
+}
+
+.table th {
+  cursor: pointer;
+  min-width: 150px;
+  text-align: left;
+  border-bottom: 1px solid;
+}
