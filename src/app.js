@@ -21,53 +21,52 @@ const views = {
 };
 
 createView({
+  className: css.app,
   children: [{
-    className: css.header,
+    className: css.sidebar,
     children: [{
-      tagName: 'span',
+      tagName: 'h1',
       textContent: () => l10n.t('title')
-    }].concat(Object.keys(views).map(view => {
-      return {
-        tagName: 'a',
-        href: `#${view}`,
-        textContent: () => l10n.t(`menu.${view}`)
-      };
-    }))
-  }, {
-    tagName: 'h1',
-    textContent: () => l10n.t(`menu.${router.$path.slice(1)}`)
+    }, {
+      className: css.menu,
+      children: Object.keys(views).map(view => {
+        return {
+          tagName: 'a',
+          href: `#${view}`,
+          style: {
+            color: () => router.$path.slice(1) === view ? 'red' : ''
+          },
+          textContent: () => l10n.t(`menu.${view}`)
+        };
+      })
+    }, {
+      className: css.footer,
+      children: Object.keys(l10n.t('languages', 'en')).map(lang => {
+        return {
+          tagName: 'button',
+          className: () => l10n.$lang === lang ? css.active : '',
+          textContent: () => l10n.t(`languages.${lang}`, 'en'),
+          on: {
+            click: () => {
+              l10n.lang = lang;
+            }
+          }
+        };
+      })
+    }]
   }, {
     className: css.content,
     children: () => {
       const View = views[router.$path.slice(1)];
-      if (View) {
-        return {
-          view: View
-        };
-      } else {
-        return {
-          tagName: 'p',
-          textContent: () => l10n.t('error.notfound')
-        };
-      }
+      return [{
+        tagName: 'h2',
+        textContent: () => l10n.t(`menu.${router.$path.slice(1)}`)
+      }, View ? {
+        view: View
+      }: {
+        tagName: 'p',
+        textContent: () => l10n.t('error.notfound')
+      }];
     }
-  }, {
-    className: css.footer,
-    children: Object.keys(l10n.t('languages', 'en')).map(lang => {
-      return {
-        tagName: 'button',
-        className: () => l10n.$lang === lang ? css.active : '',
-        textContent: () => l10n.t(`languages.${lang}`, 'en'),
-        on: {
-          click: () => {
-            l10n.lang = lang;
-          }
-        }
-      };
-    }).concat({
-      tagName: 'span',
-      className: css.path,
-      textContent: () => router.$path
-    })
   }]
 }, document.body);

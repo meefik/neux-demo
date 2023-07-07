@@ -18,6 +18,6 @@
   background-color: yellow;
 }
 
-.matrix[data-win="true"] .point {
+.matrix[data-win="true"] .cell {
   background-color: yellow;
 }

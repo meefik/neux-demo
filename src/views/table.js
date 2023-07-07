@@ -30,6 +30,7 @@ export default function () {
   return {
     children: [{
       tagName: 'input',
+      className: css.search,
       placeholder: () => l10n.t('table.search'),
       autofocus: true,
       value: () => state.$search,

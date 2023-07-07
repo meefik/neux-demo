@@ -33,5 +33,19 @@
     "search": "Search text...",
     "text": "Text",
     "checked": "Flag"
+  },
+  "form": {
+    "text": "Text",
+    "password": "Password",
+    "color": "Color",
+    "date": "Date",
+    "time": "Time",
+    "range": "Range",
+    "number": "Number",
+    "checkbox": "Checkbox",
+    "radio1": "Radio 1",
+    "radio2": "Radio 2",
+    "submit": "Submit",
+    "reset": "Reset"
   }
 }

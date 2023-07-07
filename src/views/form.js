@@ -1,5 +1,6 @@
 import { createState } from '#veux';
 import css from '../styles/form.module.css';
+import l10n from '../l10n';
 
 export default function () {
   const state = createState();
@@ -18,7 +19,7 @@ export default function () {
     children: [{
       children: [{
         tagName: 'label',
-        textContent: 'Text'
+        textContent: () => l10n.t('form.text')
       }, {
         tagName: 'input',
         type: 'text',
@@ -32,7 +33,7 @@ export default function () {
     }, {
       children: [{
         tagName: 'label',
-        textContent: 'Password'
+        textContent: () => l10n.t('form.password')
       }, {
         tagName: 'input',
         type: 'password',
@@ -46,7 +47,7 @@ export default function () {
     }, {
       children: [{
         tagName: 'label',
-        textContent: 'Color'
+        textContent: () => l10n.t('form.color')
       }, {
         tagName: 'input',
         type: 'color',
@@ -60,7 +61,7 @@ export default function () {
     }, {
       children: [{
         tagName: 'label',
-        textContent: 'Date'
+        textContent: () => l10n.t('form.date')
       }, {
         tagName: 'input',
         type: 'date',
@@ -74,7 +75,7 @@ export default function () {
     }, {
       children: [{
         tagName: 'label',
-        textContent: 'Time'
+        textContent: () => l10n.t('form.time')
       }, {
         tagName: 'input',
         type: 'time',
@@ -88,7 +89,7 @@ export default function () {
     }, {
       children: [{
         tagName: 'label',
-        textContent: 'Range'
+        textContent: () => l10n.t('form.range')
       }, {
         tagName: 'input',
         type: 'range',
@@ -102,7 +103,7 @@ export default function () {
     }, {
       children: [{
         tagName: 'label',
-        textContent: 'Number'
+        textContent: () => l10n.t('form.number')
       }, {
         tagName: 'input',
         type: 'number',
@@ -116,7 +117,7 @@ export default function () {
     }, {
       children: [{
         tagName: 'label',
-        textContent: 'Checkbox'
+        textContent: () => l10n.t('form.checkbox')
       }, {
         tagName: 'input',
         type: 'checkbox',
@@ -130,7 +131,7 @@ export default function () {
     }, {
       children: [{
         tagName: 'label',
-        textContent: 'Radio 1'
+        textContent: () => l10n.t('form.radio1')
       }, {
         tagName: 'input',
         type: 'radio',
@@ -146,7 +147,7 @@ export default function () {
     }, {
       children: [{
         tagName: 'label',
-        textContent: 'Radio 2'
+        textContent: () => l10n.t('form.radio2')
       }, {
         tagName: 'input',
         type: 'radio',
@@ -163,11 +164,11 @@ export default function () {
       children: [{
         tagName: 'input',
         type: 'submit',
-        value: 'Submit'
+        value: () => l10n.t('form.submit')
       }, {
         tagName: 'input',
         type: 'reset',
-        value: 'Reset'
+        value: () => l10n.t('form.reset')
       }]
     }]
   };
