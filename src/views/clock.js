@@ -1,4 +1,4 @@
-import { createState } from '#veux';
+import { createState } from '#neux';
 import css from '../styles/clock.module.css';
 
 const svg = 'http://www.w3.org/2000/svg';

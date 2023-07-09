@@ -1,4 +1,4 @@
-import { createL10n } from '#veux';
+import { createL10n } from '#neux';
 import en from './locales/en.json';
 import ru from './locales/ru.json';
 

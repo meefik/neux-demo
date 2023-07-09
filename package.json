@@ -1,9 +1,16 @@
 {
   "name": "veux-examples",
   "version": "0.1.0",
+  "description": "Examples for the Neux UI library.",
+  "author": "Anton Skshidlevsky <meefik@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/neux-dev/neux.git"
+  },
   "type": "module",
   "imports": {
-    "#veux": "../veux/src/index.js"
+    "#neux": "../neux/src/index.js"
   },
   "scripts": {
     "dev": "vite --host 0.0.0.0",

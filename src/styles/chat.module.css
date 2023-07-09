@@ -1,0 +1,70 @@
+.list {
+  border: 1px solid #eee;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  height: 300px;
+}
+
+.item {
+  display: flex;
+  margin: 5px 10px;
+  padding: 5px;
+}
+
+.item .avatar {
+  display: block;
+  border-radius: 50%;
+  overflow: hidden;
+  width: 48px;
+  height: 48px;
+	flex-grow: 0;
+	flex-shrink: 0;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  border: 1px solid gray;
+}
+
+.item div.avatar {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAwIiBoZWlnaHQ9IjYwMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIzMCIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxjaXJjbGUgY3g9IjMwMCIgY3k9IjIzMCIgcj0iMTE1Ii8+PHBhdGggZD0ibTEwNi44MiA0ODEuNGEyMDUgMjA1IDEgMCAxIDM4Ni4zNiAwIi8+PC9zdmc+Cg==");
+}
+
+.item .message {
+  flex: 1;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  margin: 0 5px;
+  background-color: #fffff0;
+}
+
+.item.me .message {
+  background-color: #f0ffff;
+}
+
+.item .header {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+}
+
+.item .header .author {
+  flex: 1;
+  font-weight: bold;
+}
+
+.item .header .time {
+  color: gray;
+  font-size: 0.8em;
+}
+
+.item .text {
+  padding: 0 5px;
+}
+
+.toolbar {
+  display: flex;
+}
+
+.toolbar .input {
+  flex: 1
+}

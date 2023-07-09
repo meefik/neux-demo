@@ -8,6 +8,9 @@
   border-right: 1px dashed gray;
   margin-right: 10px;
   padding-right: 10px;
+  flex-basis: 150px;
+	flex-grow: 0;
+	flex-shrink: 0;
 }
 
 .sidebar .menu {

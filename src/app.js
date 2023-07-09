@@ -1,4 +1,4 @@
-import { createView } from '#veux';
+import { createView } from '#neux';
 import css from './styles/app.module.css';
 import l10n from './l10n';
 import router from './router';
@@ -9,6 +9,8 @@ import Clock from './views/clock';
 import Sketch from './views/sketch';
 import Form from './views/form';
 import Table from './views/table';
+import Chat from './views/chat';
+import DnD from './views/dnd';
 
 const views = {
   todo: Todo,
@@ -17,7 +19,9 @@ const views = {
   clock: Clock,
   sketch: Sketch,
   form: Form,
-  table: Table
+  table: Table,
+  chat: Chat,
+  dnd: DnD
 };
 
 createView({

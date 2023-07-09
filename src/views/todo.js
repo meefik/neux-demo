@@ -1,4 +1,4 @@
-import { createState } from '#veux';
+import { createState } from '#neux';
 import css from '../styles/todo.module.css';
 import l10n from '../l10n';
 import router from '../router';

@@ -1,4 +1,4 @@
-import { createState } from '#veux';
+import { createState } from '#neux';
 import css from '../styles/tictactoe.module.css';
 
 const SIZE = 5;

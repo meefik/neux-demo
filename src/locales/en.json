@@ -11,7 +11,9 @@
     "clock": "Clock",
     "sketch": "Sketch",
     "form": "Form",
-    "table": "Table"
+    "table": "Table",
+    "chat": "Chat",
+    "dnd": "Drag'n'Drop"
   },
   "error": {
     "notfound": "Not found"
@@ -47,5 +49,9 @@
     "radio2": "Radio 2",
     "submit": "Submit",
     "reset": "Reset"
+  },
+  "chat": {
+    "send": "Send",
+    "message": "Enter your message..."
   }
 }

@@ -1,0 +1,22 @@
+.box {
+  display: flex;
+}
+
+.row {
+  flex-basis: 200px;
+  flex-grow: 0;
+	flex-shrink: 0;
+  border: 1px solid #ccc;
+  padding-bottom: 30px;
+}
+
+.cell {
+  background-color: #eee;
+  margin: 5px;
+  border: 1px solid #ccc;
+  text-align: center;
+}
+
+.active {
+  border: 1px dashed red;
+}

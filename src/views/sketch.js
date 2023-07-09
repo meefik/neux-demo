@@ -1,4 +1,4 @@
-import { createState } from '#veux';
+import { createState } from '#neux';
 import css from '../styles/sketch.module.css';
 
 export default function () {

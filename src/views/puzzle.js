@@ -1,4 +1,4 @@
-import { createState } from '#veux';
+import { createState } from '#neux';
 import css from '../styles/puzzle.module.css';
 import l10n from '../l10n';
 
