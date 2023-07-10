@@ -11,6 +11,7 @@ import Form from './views/form';
 import Table from './views/table';
 import Chat from './views/chat';
 import DnD from './views/dnd';
+import Terminal from './views/terminal';
 
 const views = {
   todo: Todo,
@@ -21,7 +22,8 @@ const views = {
   form: Form,
   table: Table,
   chat: Chat,
-  dnd: DnD
+  dnd: DnD,
+  terminal: Terminal
 };
 
 createView({

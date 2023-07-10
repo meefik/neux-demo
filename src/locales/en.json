@@ -13,7 +13,8 @@
     "form": "Form",
     "table": "Table",
     "chat": "Chat",
-    "dnd": "Drag'n'Drop"
+    "dnd": "Drag'n'Drop",
+    "terminal": "Terminal"
   },
   "error": {
     "notfound": "Not found"

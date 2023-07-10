@@ -1,0 +1,14 @@
+.terminal {
+  width: 480px;
+  height: 320px;
+  user-select: none;
+  cursor: text;
+  position: relative;
+  font-family: monospace;
+  font-size: 14px;
+  color: #fff;
+  background-color: #333;
+  overflow-y: scroll;
+  box-sizing: border-box;
+  white-space: pre;
+}
