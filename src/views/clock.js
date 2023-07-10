@@ -1,7 +1,6 @@
 import { createState } from '#neux';
 import css from '../styles/clock.module.css';
 
-const svg = 'http://www.w3.org/2000/svg';
 const rotate = (rotate, fixed = 1) => `rotate(${(rotate * 360).toFixed(fixed)})`;
 const getSecondsSinceMidnight = () => (Date.now() - new Date().setHours(0, 0, 0, 0)) / 1000;
 
@@ -28,19 +27,16 @@ export default function () {
     className: css.clock,
     children: [{
       tagName: 'svg',
-      namespaceURI: svg,
       attributes: {
         viewBox: '0 0 200 200'
       },
       children: [{
         tagName: 'g',
-        namespaceURI: svg,
         attributes: {
           transform: 'translate(100, 100)'
         },
         children: [{
           tagName: 'circle',
-          namespaceURI: svg,
           attributes: {
             class: 'text-neutral-900',
             r: '99',
@@ -79,7 +75,6 @@ function Line({ numberOfLines, className, fixed, size, width }) {
 function Hand({ fixed, size, width, rotate, className }) {
   return {
     tagName: 'line',
-    namespaceURI: svg,
     attributes: {
       class: className || '',
       y1: fixed ? size - 95 : undefined,
