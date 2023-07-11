@@ -50,9 +50,7 @@ export default function () {
     },
     children: [{
       children: () => {
-        console.log('render', state.lines);
         return state.$lines.$$each(line => {
-          console.log('$$each', line)
           return {
             on: {
               mounted() {

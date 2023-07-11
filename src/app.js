@@ -12,6 +12,7 @@ import Table from './views/table';
 import Chat from './views/chat';
 import DnD from './views/dnd';
 import Terminal from './views/terminal';
+import Tree from './views/tree';
 
 const views = {
   todo: Todo,
@@ -23,7 +24,8 @@ const views = {
   table: Table,
   chat: Chat,
   dnd: DnD,
-  terminal: Terminal
+  terminal: Terminal,
+  tree: Tree
 };
 
 createView({
