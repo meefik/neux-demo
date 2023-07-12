@@ -1,12 +1,12 @@
 {
-  "name": "veux-examples",
+  "name": "neux-examples",
   "version": "0.1.0",
   "description": "Examples for the Neux UI library.",
   "author": "Anton Skshidlevsky <meefik@gmail.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/neux-dev/neux.git"
+    "url": "https://github.com/neux-dev/neux-examples.git"
   },
   "type": "module",
   "imports": {

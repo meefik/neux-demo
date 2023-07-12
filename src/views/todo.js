@@ -57,7 +57,7 @@ export default function Todo() {
         return ['all', 'active', 'completed'].map((item) => {
           return {
             tagName: 'a',
-            href: `${router.path}?filter=${item}`,
+            href: `#${router.path}?filter=${item}`,
             style: {
               padding: '0 2px',
               color: () => {

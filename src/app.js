@@ -42,7 +42,7 @@ createView({
           tagName: 'a',
           href: `#${view}`,
           style: {
-            color: () => router.$path.slice(1) === view ? 'red' : ''
+            color: () => router.$path === view ? 'red' : ''
           },
           textContent: () => l10n.t(`menu.${view}`)
         };
@@ -65,10 +65,10 @@ createView({
   }, {
     className: css.content,
     children: () => {
-      const View = views[router.$path.slice(1)];
+      const View = views[router.$path];
       return [{
         tagName: 'h2',
-        textContent: () => l10n.t(`menu.${router.$path.slice(1)}`)
+        textContent: () => l10n.t(`menu.${router.$path}`)
       }, View ? {
         view: View
       }: {
