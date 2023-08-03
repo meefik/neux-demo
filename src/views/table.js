@@ -1,4 +1,4 @@
-import { createState } from '#neux';
+import { createState } from 'neux';
 import css from '../styles/table.module.css';
 import l10n from '../l10n';
 
@@ -10,7 +10,11 @@ export default function () {
     sort: {},
     list: () => {
       return Array(100).fill(0).map((v, i) => {
-        return { text: `Item ${i + 1}`, checked: Math.random() > 0.5 }
+        return {
+          text: `Item ${i + 1}`,
+          checked: Math.random() > 0.5,
+          timestamp: randomDate(new Date(2020, 0, 1), new Date()).toISOString().slice(0, 10)
+        };
       });
     },
     filtered: (obj) => {
@@ -19,7 +23,7 @@ export default function () {
       }).sort((a, b) => {
         return obj.sort.$order === 1
           ? a[obj.sort.$key] > b[obj.sort.$key] ? -1 : 1
-          : a[obj.sort.$key] < b[obj.sort.$key] ? -1 : 1
+          : a[obj.sort.$key] < b[obj.sort.$key] ? -1 : 1;
       });
     },
     splitted: (obj) => {
@@ -40,7 +44,7 @@ export default function () {
             e.preventDefault();
             state.search = e.target.value;
           }
-        },
+        }
       }
     }, {
       className: css.table,
@@ -51,7 +55,7 @@ export default function () {
           children: [{
             tagName: 'tr',
             children: () => {
-              return ['text', 'checked'].map(field => {
+              return ['text', 'checked', 'timestamp'].map(field => {
                 return {
                   tagName: 'th',
                   textContent: () => {
@@ -85,6 +89,9 @@ export default function () {
                 }, {
                   tagName: 'td',
                   textContent: () => item.$checked ? 'Yes' : 'No'
+                }, {
+                  tagName: 'td',
+                  textContent: () => item.$timestamp
                 }]
               };
             });
@@ -135,4 +142,8 @@ export default function () {
       }
     }]
   };
+}
+
+function randomDate (start, end) {
+  return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
 }

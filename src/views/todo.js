@@ -1,20 +1,24 @@
-import { createState } from '#neux';
+import { createState, createSync } from 'neux';
 import css from '../styles/todo.module.css';
 import l10n from '../l10n';
 import router from '../router';
 
-function store(state, changes) {
-  if (changes) {
-    localStorage.setItem('todos', JSON.stringify(state));
+function syncer (newv, oldv, diff) {
+  if (!oldv) {
+    return JSON.parse(localStorage.getItem('todos') || '[]');
+  } else {
+    localStorage.setItem('todos', JSON.stringify(newv));
   }
-  return JSON.parse(localStorage.getItem('todos') || '[]');
+  return newv;
 }
 
-export default function Todo() {
+export default function Todo () {
   const state = createState({
     list: []
   });
-  state.list.$$sync(store);
+  const sync = createSync(state.list, syncer, { slippage: 100 });
+  sync();
+  state.list.$$on('*', () => sync());
   return {
     children: [{
       tagName: 'input',
@@ -29,9 +33,8 @@ export default function Todo() {
               text: e.target.value
             });
             e.target.value = '';
-            state.list.$$sync();
           }
-        },
+        }
       }
     }, {
       tagName: 'div',
@@ -44,7 +47,6 @@ export default function Todo() {
             state.list.forEach((item) => {
               item.checked = checked;
             });
-            state.list.$$sync();
           }
         }
       }, {
@@ -63,12 +65,12 @@ export default function Todo() {
               color: () => {
                 const filter = router.params.$filter;
                 return (!filter && item === 'all') || filter === item ? 'red' : '';
-              },
+              }
             },
-            textContent: () => l10n.t(`todo.filter.${item}`),
+            textContent: () => l10n.t(`todo.filter.${item}`)
           };
         });
-      },
+      }
     }, {
       tagName: 'ul',
       className: css.list,
@@ -88,7 +90,6 @@ export default function Todo() {
               on: {
                 change: (e) => {
                   item.checked = e.target.checked;
-                  state.list.$$sync();
                 }
               }
             }, {
@@ -106,9 +107,6 @@ export default function Todo() {
                       input: (e) => {
                         item.text = e.target.value;
                       },
-                      change: () => {
-                        state.list.$$sync();
-                      },
                       blur: () => {
                         item.editable = false;
                       },
@@ -117,25 +115,20 @@ export default function Todo() {
                           e.preventDefault();
                           item.editable = false;
                         }
-                      },
-                    },
+                      }
+                    }
                   }
                   : {
                     tagName: 'label',
                     style: {
                       textDecoration: () =>
-                        item.$checked ? 'line-through' : 'none',
+                        item.$checked ? 'line-through' : 'none'
                     },
-                    // style: () => {
-                    //   return item.$checked
-                    //     ? { textDecoration: "line-through" }
-                    //     : { textDecoration: "none" };
-                    // },
                     textContent: () => item.text,
                     on: {
                       dblclick: () => {
                         item.editable = true;
-                      },
+                      }
                     }
                   };
               }
@@ -148,7 +141,6 @@ export default function Todo() {
                   e.preventDefault();
                   const index = state.list.indexOf(item);
                   state.list.splice(index, 1);
-                  state.list.$$sync();
                 }
               }
             }]

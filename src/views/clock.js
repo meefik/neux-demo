@@ -1,4 +1,4 @@
-import { createState } from '#neux';
+import { createState } from 'neux';
 import css from '../styles/clock.module.css';
 
 const rotate = (rotate, fixed = 1) => `rotate(${(rotate * 360).toFixed(fixed)})`;
@@ -15,12 +15,12 @@ export default function () {
   let timer;
   return {
     on: {
-      mounted() {
+      mounted () {
         timer = setInterval(() => {
           state.time = getSecondsSinceMidnight();
         }, 50);
       },
-      removed() {
+      removed () {
         clearInterval(timer);
       }
     },
@@ -59,20 +59,20 @@ export default function () {
           Hand({ className: css.subsecond, size: 85, width: 1, rotate: () => state.$subsecond }),
           Hand({ className: css.second, size: 80, width: 2, rotate: () => state.$second }),
           Hand({ className: css.minute, size: 70, width: 3, rotate: () => state.$minute }),
-          Hand({ className: css.hour, size: 50, width: 4, rotate: () => state.$hour }),
+          Hand({ className: css.hour, size: 50, width: 4, rotate: () => state.$hour })
         ])
       }]
     }]
-  }
+  };
 }
 
-function Line({ numberOfLines, className, fixed, size, width }) {
+function Line ({ numberOfLines, className, fixed, size, width }) {
   return new Array(numberOfLines).fill(0).map((v, i) => {
     return Hand({ rotate: rotate(i / numberOfLines), fixed, size, width, className });
   });
 }
 
-function Hand({ fixed, size, width, rotate, className }) {
+function Hand ({ fixed, size, width, rotate, className }) {
   return {
     tagName: 'line',
     attributes: {

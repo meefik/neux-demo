@@ -1,4 +1,4 @@
-.matrix {
+.grid {
   display: grid;
 }
 
@@ -18,6 +18,10 @@
   background-color: yellow;
 }
 
-.matrix[data-win="true"] .cell {
+.cell:focus {
+  background-color: violet;
+}
+
+.grid[data-win="true"] .cell {
   background-color: yellow;
 }

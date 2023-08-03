@@ -1,6 +1,5 @@
-import { createState } from '#neux';
+import { createState } from 'neux';
 import css from '../styles/dnd.module.css';
-import l10n from '../l10n';
 
 export default function () {
   const state = createState({
@@ -11,19 +10,19 @@ export default function () {
   return {
     className: css.box,
     on: {
-      dragstart(e) {
+      dragstart (e) {
         dragged = e.target;
       },
-      dragenter(e) {
+      dragenter (e) {
         e.target.classList.add(css.active);
       },
-      dragleave(e) {
+      dragleave (e) {
         e.target.classList.remove(css.active);
       },
-      dragover(e){
+      dragover (e) {
         e.preventDefault();
       },
-      drop(e) {
+      drop (e) {
         e.preventDefault();
         const el = e.target;
         el.classList.remove(css.active);
@@ -51,7 +50,7 @@ export default function () {
           }
           el.parentNode.insertBefore(dragged, el);
         }
-        console.log(state.list1, state.list2)
+        console.log(state.list1, state.list2);
       }
     },
     children: [{
@@ -64,7 +63,7 @@ export default function () {
             textContent: item,
             draggable: true
           };
-        })
+        });
       }
     }, {
       className: css.row,
@@ -76,7 +75,7 @@ export default function () {
             textContent: item,
             draggable: true
           };
-        })
+        });
       }
     }]
   };

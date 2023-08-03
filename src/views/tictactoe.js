@@ -1,4 +1,4 @@
-import { createState } from '#neux';
+import { createState } from 'neux';
 import css from '../styles/tictactoe.module.css';
 
 const SIZE = 5;
@@ -10,9 +10,9 @@ export default function () {
   });
   return {
     children: [{
-      className: css.matrix,
+      className: css.grid,
       style: {
-        gridTemplateColumns: Array(SIZE).fill('64px').join(' ')
+        gridTemplateColumns: `repeat(${SIZE}, 64px)`
       },
       children: () => {
         return state.matrix.$$each(line => {
@@ -20,6 +20,7 @@ export default function () {
             children: () => {
               return line.$$each((cell) => {
                 return {
+                  tagName: 'button',
                   className: css.cell,
                   style: {
                     color: () => cell.$mark === 'x' ? 'red' : 'blue',
@@ -45,15 +46,15 @@ export default function () {
   };
 }
 
-function createMatrix(size) {
+function createMatrix (size) {
   return Array(size).fill(0).map(() =>
     Array(size).fill(0).map(() => ({}))
   );
 }
 
-function checkLine(line) {
+function checkLine (line) {
   let match = true;
-  let mark = line[0].mark;
+  const mark = line[0].mark;
   for (let i = 0; i < line.length; i++) {
     if (!line[i].mark || line[i].mark !== mark) {
       match = false;
@@ -63,14 +64,14 @@ function checkLine(line) {
   return match;
 }
 
-function markWin(line) {
+function markWin (line) {
   for (let i = 0; i < line.length; i++) {
     line[i].win = true;
   }
   return true;
 }
 
-function checkMatrix(matrix) {
+function checkMatrix (matrix) {
   const diagonal1 = [];
   const diagonal2 = [];
   const inverted = createMatrix(matrix.length);

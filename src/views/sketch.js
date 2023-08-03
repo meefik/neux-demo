@@ -1,4 +1,4 @@
-import { createState } from '#neux';
+import { createState } from 'neux';
 import css from '../styles/sketch.module.css';
 
 export default function () {
@@ -40,18 +40,18 @@ export default function () {
               }
             }
           };
-        })
+        });
       }
     }]
   };
 }
 
-function createMatrix(size) {
-  return Array(size*size).fill(0).map(item => {
+function createMatrix (size) {
+  return Array(size * size).fill(0).map(item => {
     return {};
   });
 }
 
-function randomHexColorString() {
-  return "#" + Math.floor(Math.random() * 16777215).toString(16);
+function randomHexColorString () {
+  return '#' + Math.floor(Math.random() * 16777215).toString(16);
 }

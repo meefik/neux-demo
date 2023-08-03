@@ -1,4 +1,4 @@
-import { createState } from '#neux';
+import { createState } from 'neux';
 import css from '../styles/chat.module.css';
 import l10n from '../l10n';
 
@@ -39,10 +39,10 @@ export default function () {
     children: [{
       className: css.list,
       on: {
-        mounted() {
+        mounted () {
           this.dispatchEvent(new Event('scroll_down'));
         },
-        scroll_down() {
+        scroll_down () {
           this.scrollTo(0, this.scrollHeight);
         }
       },
@@ -51,7 +51,7 @@ export default function () {
           return {
             className: isMe(item.author) ? `${css.item} ${css.me}` : css.item,
             on: {
-              mounted() {
+              mounted () {
                 this.dispatchEvent(new Event('scroll_down', { bubbles: true }));
               }
             },

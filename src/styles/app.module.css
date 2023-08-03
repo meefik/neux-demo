@@ -1,5 +1,17 @@
-.app {
+.cols {
   display: flex;
+  flex-direction: row;
+}
+
+.rows {
+  display: flex;
+  flex-direction: column;
+}
+
+.logo {
+  width: 64px;
+  height: 64px;
+  margin: 5px auto;
 }
 
 .sidebar {
@@ -13,11 +25,6 @@
 	flex-shrink: 0;
 }
 
-.sidebar .menu {
-  display: flex;
-  flex-direction: column;
-}
-
 .content {
   display: block;
 }
@@ -25,7 +32,6 @@
 .sidebar .footer {
   margin-top: 20px;
   padding-top: 10px;
-  border-top: 1px dashed gray;
 }
 
 .sidebar .footer .active {

@@ -3,22 +3,21 @@
     "en": "English",
     "ru": "Русский"
   },
-  "title": "Menu",
   "menu": {
     "todo": "To Do",
     "tictactoe": "Tic-Tac-Toe",
     "puzzle": "15 Puzzle",
     "clock": "Clock",
     "sketch": "Sketch",
-    "form": "Form",
     "table": "Table",
     "chat": "Chat",
     "dnd": "Drag'n'Drop",
     "terminal": "Terminal",
     "tree": "Tree"
   },
-  "error": {
-    "notfound": "Not found"
+  "notfound": {
+    "title": "Not found",
+    "message": "Page not found"
   },
   "todo": {
     "input": "Enter your task...",
@@ -36,21 +35,8 @@
   "table": {
     "search": "Search text...",
     "text": "Text",
-    "checked": "Flag"
-  },
-  "form": {
-    "text": "Text",
-    "password": "Password",
-    "color": "Color",
-    "date": "Date",
-    "time": "Time",
-    "range": "Range",
-    "number": "Number",
-    "checkbox": "Checkbox",
-    "radio1": "Radio 1",
-    "radio2": "Radio 2",
-    "submit": "Submit",
-    "reset": "Reset"
+    "checked": "Flag",
+    "timestamp": "Timestamp"
   },
   "chat": {
     "send": "Send",

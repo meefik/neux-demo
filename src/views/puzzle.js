@@ -1,4 +1,4 @@
-import { createState } from '#neux';
+import { createState } from 'neux';
 import css from '../styles/puzzle.module.css';
 import l10n from '../l10n';
 
@@ -13,9 +13,9 @@ export default function () {
   });
   return {
     children: [{
-      className: css.matrix,
+      className: css.grid,
       style: {
-        gridTemplateColumns: Array(SIZE).fill('64px').join(' ')
+        gridTemplateColumns: `repeat(${SIZE}, 64px)`
       },
       dataset: {
         win: () => state.$win
@@ -23,6 +23,7 @@ export default function () {
       children: () => {
         return state.matrix.$$each((v, i) => {
           return {
+            tagName: 'button',
             className: css.cell,
             textContent: v,
             on: {
@@ -30,7 +31,8 @@ export default function () {
                 const sel = state.selected;
                 if (sel !== null && i !== sel &&
                   ((sel === i - 1 && i % SIZE > 0) ||
-                  (sel === i + 1 && (i+1) % SIZE > 0) || sel === i + SIZE || sel === i - SIZE)) {
+                  (sel === i + 1 && (i + 1) % SIZE > 0) ||
+                  sel === i + SIZE || sel === i - SIZE)) {
                   const oldv = state.matrix[sel];
                   const newv = state.matrix[i];
                   state.matrix[i] = oldv;
@@ -52,14 +54,14 @@ export default function () {
   };
 }
 
-function checkWin(arr) {
+function checkWin (arr) {
   for (let i = 0; i < arr.length - 2; i++) {
     if (!arr[i] || !arr[i + 1] || arr[i] >= arr[i + 1]) return false;
   }
   return true;
 }
 
-function createMatrix(size) {
+function createMatrix (size) {
   const matrix = Array(size * size - 1).fill(0).map((v, i) => (i + 1));
   matrix.sort(() => Math.random() < 0.5 ? -1 : 1);
   matrix.push('');

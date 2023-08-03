@@ -1,8 +1,7 @@
-import { createState } from '#neux';
+import { createState } from 'neux';
 import css from '../styles/tree.module.css';
-import l10n from '../l10n';
 
-export default function() {
+export default function () {
   const state = createState({
     tree: [{
       id: '1',
@@ -61,12 +60,12 @@ export default function() {
                 tagName: 'span',
                 className: () => {
                   if (!item.data) return css.empty;
-                  return item.$opened ? css.opened : css.closed
+                  return item.$opened ? css.opened : css.closed;
                 },
                 on: {
                   click: (e) => {
                     if (item.data) {
-                      item.opened = !item.opened; 
+                      item.opened = !item.opened;
                     }
                   }
                 }
@@ -86,15 +85,14 @@ export default function() {
             };
           })
         };
-        
       };
       return createLeaf(state.tree);
     }
   };
 }
 
-function toggleCheckbox(leaf, flag) {
-  leaf.checked = typeof flag === 'boolean'? flag : !leaf.checked;
+function toggleCheckbox (leaf, flag) {
+  leaf.checked = typeof flag === 'boolean' ? flag : !leaf.checked;
   if (Array.isArray(leaf.data)) {
     for (const item of leaf.data) {
       toggleCheckbox(item, leaf.checked);

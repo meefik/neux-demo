@@ -1,4 +1,4 @@
-import { createState } from '#neux';
+import { createState } from 'neux';
 import css from '../styles/terminal.module.css';
 
 const COMMANDS = {
@@ -11,7 +11,7 @@ const COMMANDS = {
     ' * clear - clear terminal',
     ' '
   ]
-}
+};
 
 export default function () {
   const state = createState({
@@ -24,27 +24,27 @@ export default function () {
     state.lines.push(text);
     text = text.replace(/^>\s*/, '');
     switch (text) {
-      case 'help':
-        state.lines.push(...COMMANDS.help);
-        break;
-      case 'time':
-        state.lines.push(new Date().toLocaleTimeString());
-        break;
-      case 'date':
-        state.lines.push(new Date().toLocaleDateString());
-        break;
-      case 'clear':
-        state.lines.splice(0, state.lines.length);
-        break;
-      default:
-        state.lines.push('Command not found');
+    case 'help':
+      state.lines.push(...COMMANDS.help);
+      break;
+    case 'time':
+      state.lines.push(new Date().toLocaleTimeString());
+      break;
+    case 'date':
+      state.lines.push(new Date().toLocaleDateString());
+      break;
+    case 'clear':
+      state.lines.splice(0, state.lines.length);
+      break;
+    default:
+      state.lines.push('Command not found');
     }
   };
   return {
     className: css.terminal,
     tabindex: 0,
     on: {
-      scroll_down() {
+      scroll_down () {
         this.scrollTo(0, this.scrollHeight);
       }
     },
@@ -53,7 +53,7 @@ export default function () {
         return state.$lines.$$each(line => {
           return {
             on: {
-              mounted() {
+              mounted () {
                 const timeout = 10;
                 let index = 0;
                 let timer;
@@ -78,7 +78,7 @@ export default function () {
       },
       textContent: '> ',
       on: {
-        mounted() {
+        mounted () {
           this.focus();
           setCaret(this);
         },
@@ -95,9 +95,9 @@ export default function () {
   };
 }
 
-function setCaret(el, pos) {
-  var range = document.createRange();
-  var sel = window.getSelection();
+function setCaret (el, pos) {
+  const range = document.createRange();
+  const sel = window.getSelection();
 
   range.setStart(el, pos || el.textContent.length - 1);
   range.collapse(true);
