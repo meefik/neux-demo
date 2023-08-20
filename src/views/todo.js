@@ -63,7 +63,7 @@ export default function Todo () {
             style: {
               padding: '0 2px',
               color: () => {
-                const filter = router.params.$filter;
+                const filter = router.query.$filter;
                 return (!filter && item === 'all') || filter === item ? 'red' : '';
               }
             },
@@ -75,7 +75,7 @@ export default function Todo () {
       tagName: 'ul',
       className: css.list,
       children: () => {
-        const filter = router.params.$filter;
+        const filter = router.query.$filter;
         return state.list.$$each(item => {
           if (filter && filter !== 'all') {
             if (item.checked && filter !== 'completed') return;

@@ -53,11 +53,11 @@ createView({
         })
       }, {
         className: css.footer,
-        children: Object.keys(l10n.t('languages', 'en')).map(lang => {
+        children: l10n.locales.map(lang => {
           return {
             tagName: 'button',
             className: () => l10n.$lang === lang ? css.active : '',
-            textContent: () => l10n.t(`languages.${lang}`, 'en'),
+            textContent: () => l10n.t('language', lang),
             on: {
               click: () => {
                 l10n.lang = lang;
@@ -79,4 +79,4 @@ createView({
       }]
     }]
   }]
-}, document.body);
+}, { target: document.body });

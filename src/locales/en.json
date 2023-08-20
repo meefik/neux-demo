@@ -1,8 +1,5 @@
 {
-  "languages": {
-    "en": "English",
-    "ru": "Русский"
-  },
+  "language": "English",
   "menu": {
     "todo": "To Do",
     "tictactoe": "Tic-Tac-Toe",
