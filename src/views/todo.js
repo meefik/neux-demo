@@ -3,7 +3,7 @@ import css from '../styles/todo.module.css';
 import l10n from '../l10n';
 import router from '../router';
 
-function syncer (newv, oldv, diff) {
+function syncer (newv, oldv) {
   if (!oldv) {
     return JSON.parse(localStorage.getItem('todos') || '[]');
   } else {
