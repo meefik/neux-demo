@@ -9,16 +9,18 @@ export default function () {
     search: '',
     sort: {},
     list: () => {
-      return Array(100).fill(0).map((v, i) => {
-        return {
-          text: `Item ${i + 1}`,
-          checked: Math.random() > 0.5,
-          timestamp: randomDate(new Date(2020, 0, 1), new Date()).toISOString().slice(0, 10)
-        };
-      });
+      return Array(100).fill(0)
+        .map((v, i) => {
+          return {
+            text: `Item ${i + 1}`,
+            checked: Math.random() > 0.5,
+            timestamp: randomDate(new Date(2020, 0, 1), new Date()).toISOString()
+              .slice(0, 10)
+          };
+        });
     },
     filtered: (obj) => {
-      return obj.$list.filter(item => {
+      return obj.$list.filter((item) => {
         return `${item.text}`.includes(obj.$search);
       }).sort((a, b) => {
         return obj.sort.$order === 1
@@ -39,11 +41,13 @@ export default function () {
       autofocus: true,
       value: () => state.$search,
       on: {
-        keyup: (e) => {
-          if (e.keyCode === 13) {
-            e.preventDefault();
-            state.search = e.target.value;
-          }
+        keyup () {
+          return (e) => {
+            if (e.keyCode === 13) {
+              e.preventDefault();
+              state.search = e.target.value;
+            }
+          };
         }
       }
     }, {
@@ -55,7 +59,7 @@ export default function () {
           children: [{
             tagName: 'tr',
             children: () => {
-              return ['text', 'checked', 'timestamp'].map(field => {
+              return ['text', 'checked', 'timestamp'].map((field) => {
                 return {
                   tagName: 'th',
                   textContent: () => {
@@ -66,11 +70,13 @@ export default function () {
                     }
                   },
                   on: {
-                    click: () => {
-                      state.sort.key = field;
-                      if (!state.sort.order) state.sort.order = 1;
-                      else if (state.sort.order === 1) state.sort.order = -1;
-                      else if (state.sort.order === -1) state.sort.order = 0;
+                    click () {
+                      return () => {
+                        state.sort.key = field;
+                        if (!state.sort.order) state.sort.order = 1;
+                        else if (state.sort.order === 1) state.sort.order = -1;
+                        else if (state.sort.order === -1) state.sort.order = 0;
+                      };
                     }
                   }
                 };
@@ -88,7 +94,7 @@ export default function () {
                   textContent: () => item.$text
                 }, {
                   tagName: 'td',
-                  textContent: () => item.$checked ? 'Yes' : 'No'
+                  textContent: () => (item.$checked ? 'Yes' : 'No')
                 }, {
                   tagName: 'td',
                   textContent: () => item.$timestamp
@@ -106,36 +112,43 @@ export default function () {
           href: '#',
           textContent: '<<',
           on: {
-            click: (e) => {
-              e.preventDefault();
-              state.page = 0;
+            click () {
+              return (e) => {
+                e.preventDefault();
+                state.page = 0;
+              };
             }
           }
         },
-        ...Array(numberOfPages).fill(0).map((v, i) => {
-          return {
-            tagName: 'a',
-            href: '#',
-            textContent: `[${i + 1}]`,
-            style: {
-              color: () => state.$page === i ? 'red' : ''
-            },
-            on: {
-              click: (e) => {
-                e.preventDefault();
-                state.page = i;
+        ...Array(numberOfPages).fill(0)
+          .map((v, i) => {
+            return {
+              tagName: 'a',
+              href: '#',
+              textContent: `[${i + 1}]`,
+              style: {
+                color: () => (state.$page === i ? 'red' : '')
+              },
+              on: {
+                click () {
+                  return (e) => {
+                    e.preventDefault();
+                    state.page = i;
+                  };
+                }
               }
-            }
-          };
-        }),
+            };
+          }),
         {
           tagName: 'a',
           href: '#',
           textContent: '>>',
           on: {
-            click: (e) => {
-              e.preventDefault();
-              state.page = numberOfPages - 1;
+            click () {
+              return (e) => {
+                e.preventDefault();
+                state.page = numberOfPages - 1;
+              };
             }
           }
         }];
@@ -145,5 +158,5 @@ export default function () {
 }
 
 function randomDate (start, end) {
-  return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+  return new Date(start.getTime() + (Math.random() * (end.getTime() - start.getTime())));
 }

@@ -15,7 +15,7 @@ export default function () {
         gridTemplateColumns: `repeat(${SIZE}, 64px)`
       },
       children: () => {
-        return state.matrix.$$each(line => {
+        return state.matrix.$$each((line) => {
           return {
             children: () => {
               return line.$$each((cell) => {
@@ -23,17 +23,19 @@ export default function () {
                   tagName: 'button',
                   className: css.cell,
                   style: {
-                    color: () => cell.$mark === 'x' ? 'red' : 'blue',
-                    backgroundColor: () => cell.$win ? 'yellow' : ''
+                    color: () => (cell.$mark === 'x' ? 'red' : 'blue'),
+                    backgroundColor: () => (cell.$win ? 'yellow' : '')
                   },
                   textContent: () => cell.$mark,
                   on: {
-                    click: () => {
-                      if (!cell.mark && !state.win) {
-                        state.current = state.current === 'x' ? 'o' : 'x';
-                        cell.mark = state.current;
-                        if (checkMatrix(state.matrix)) state.win = true;
-                      }
+                    click () {
+                      return () => {
+                        if (!cell.mark && !state.win) {
+                          state.current = state.current === 'x' ? 'o' : 'x';
+                          cell.mark = state.current;
+                          if (checkMatrix(state.matrix)) state.win = true;
+                        }
+                      };
                     }
                   }
                 };
@@ -47,9 +49,9 @@ export default function () {
 }
 
 function createMatrix (size) {
-  return Array(size).fill(0).map(() =>
-    Array(size).fill(0).map(() => ({}))
-  );
+  return Array(size).fill(0)
+    .map(() => Array(size).fill(0)
+      .map(() => ({})));
 }
 
 function checkLine (line) {

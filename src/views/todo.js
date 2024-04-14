@@ -25,15 +25,17 @@ export default function Todo () {
       placeholder: () => l10n.t('todo.input'),
       autofocus: true,
       on: {
-        keyup: (e) => {
-          if (e.keyCode === 13) {
-            e.preventDefault();
-            state.list.push({
-              id: `${Date.now()}`,
-              text: e.target.value
-            });
-            e.target.value = '';
-          }
+        keyup () {
+          return (e) => {
+            if (e.keyCode === 13) {
+              e.preventDefault();
+              state.list.push({
+                id: `${Date.now()}`,
+                text: e.target.value
+              });
+              e.target.value = '';
+            }
+          };
         }
       }
     }, {
@@ -42,11 +44,13 @@ export default function Todo () {
         tagName: 'input',
         type: 'checkbox',
         on: {
-          change: (e) => {
-            const checked = e.target.checked;
-            state.list.forEach((item) => {
-              item.checked = checked;
-            });
+          change () {
+            return (e) => {
+              const checked = e.target.checked;
+              state.list.forEach((item) => {
+                item.checked = checked;
+              });
+            };
           }
         }
       }, {
@@ -76,7 +80,7 @@ export default function Todo () {
       className: css.list,
       children: () => {
         const filter = router.query.$filter;
-        return state.list.$$each(item => {
+        return state.list.$$each((item) => {
           if (filter && filter !== 'all') {
             if (item.checked && filter !== 'completed') return;
             if (!item.checked && filter !== 'active') return;
@@ -88,59 +92,73 @@ export default function Todo () {
               type: 'checkbox',
               checked: () => item.$checked,
               on: {
-                change: (e) => {
-                  item.checked = e.target.checked;
+                change () {
+                  return (e) => {
+                    item.checked = e.target.checked;
+                  };
                 }
               }
             }, {
               tagName: 'span',
               children: () => {
-                return item.$editable
+                const view = item.$editable
                   ? {
                     tagName: 'input',
                     type: 'text',
                     value: item.text,
                     on: {
-                      mounted: (e) => {
-                        e.target.focus();
+                      mounted () {
+                        return (e) => {
+                          e.target.focus();
+                        };
                       },
-                      input: (e) => {
-                        item.text = e.target.value;
+                      input () {
+                        return (e) => {
+                          item.text = e.target.value;
+                        };
                       },
-                      blur: () => {
-                        item.editable = false;
-                      },
-                      keydown: (e) => {
-                        if (e.keyCode === 13) {
-                          e.preventDefault();
+                      blur () {
+                        return () => {
                           item.editable = false;
-                        }
+                        };
+                      },
+                      keydown () {
+                        return (e) => {
+                          if (e.keyCode === 13) {
+                            e.preventDefault();
+                            item.editable = false;
+                          }
+                        };
                       }
                     }
                   }
                   : {
                     tagName: 'label',
                     style: {
-                      textDecoration: () =>
-                        item.$checked ? 'line-through' : 'none'
+                      textDecoration: () => (item.$checked ? 'line-through' : 'none')
                     },
                     textContent: () => item.text,
                     on: {
-                      dblclick: () => {
-                        item.editable = true;
+                      dblclick () {
+                        return () => {
+                          item.editable = true;
+                        };
                       }
                     }
                   };
+                return [view];
               }
             }, {
               tagName: 'a',
               href: '#',
               textContent: '[x]',
               on: {
-                click: (e) => {
-                  e.preventDefault();
-                  const index = state.list.indexOf(item);
-                  state.list.splice(index, 1);
+                click () {
+                  return (e) => {
+                    e.preventDefault();
+                    const index = state.list.indexOf(item);
+                    state.list.splice(index, 1);
+                  };
                 }
               }
             }]

@@ -49,13 +49,13 @@ export default function () {
     children: () => {
       const createLeaf = (data) => {
         if (!data) return [];
-        return {
+        return [{
           className: css.tree,
           tagName: 'ul',
-          children: data.$$each(item => {
+          children: data.$$each((item) => {
             return {
               tagName: 'li',
-              className: () => item.$opened ? '' : css.hidden,
+              className: () => (item.$opened ? '' : css.hidden),
               children: [{
                 tagName: 'span',
                 className: () => {
@@ -63,10 +63,12 @@ export default function () {
                   return item.$opened ? css.opened : css.closed;
                 },
                 on: {
-                  click: (e) => {
-                    if (item.data) {
-                      item.opened = !item.opened;
-                    }
+                  click () {
+                    return () => {
+                      if (item.data) {
+                        item.opened = !item.opened;
+                      }
+                    };
                   }
                 }
               }, {
@@ -74,8 +76,10 @@ export default function () {
                 type: 'checkbox',
                 checked: () => item.$checked,
                 on: {
-                  change: () => {
-                    toggleCheckbox(item);
+                  change () {
+                    return () => {
+                      toggleCheckbox(item);
+                    };
                   }
                 }
               }, {
@@ -84,7 +88,7 @@ export default function () {
               }].concat(createLeaf(item.data))
             };
           })
-        };
+        }];
       };
       return createLeaf(state.tree);
     }

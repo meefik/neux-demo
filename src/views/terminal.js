@@ -45,28 +45,32 @@ export default function () {
     tabindex: 0,
     on: {
       scroll_down () {
-        this.scrollTo(0, this.scrollHeight);
+        return ({ currentTarget }) => {
+          currentTarget.scrollTo(0, currentTarget.scrollHeight);
+        };
       }
     },
     children: [{
       children: () => {
-        return state.$lines.$$each(line => {
+        return state.$lines.$$each((line) => {
           return {
             on: {
               mounted () {
-                const timeout = 10;
-                let index = 0;
-                let timer;
-                const print = () => {
-                  this.textContent = line.slice(0, index++);
-                  if (index > line.length) {
-                    clearTimeout(timer);
-                  } else {
-                    timer = setTimeout(print, timeout);
-                  }
-                  this.dispatchEvent(new Event('scroll_down', { bubbles: true }));
+                return ({ target }) => {
+                  const timeout = 10;
+                  let index = 0;
+                  let timer;
+                  const print = () => {
+                    target.textContent = line.slice(0, index++);
+                    if (index > line.length) {
+                      clearTimeout(timer);
+                      target.dispatchEvent(new Event('scroll_down', { bubbles: true }));
+                    } else {
+                      timer = setTimeout(print, timeout);
+                    }
+                  };
+                  timer = setTimeout(print, timeout);
                 };
-                timer = setTimeout(print, timeout);
               }
             }
           };
@@ -79,16 +83,20 @@ export default function () {
       textContent: '> ',
       on: {
         mounted () {
-          this.focus();
-          setCaret(this);
-        },
-        keydown: (e) => {
-          if (!e.shiftKey && e.keyCode === 13) {
-            e.preventDefault();
-            execCmd(e.target.textContent);
-            e.target.textContent = '> ';
+          return (e) => {
+            e.target.focus();
             setCaret(e.target);
-          }
+          };
+        },
+        keydown () {
+          return (e) => {
+            if (!e.shiftKey && e.keyCode === 13) {
+              e.preventDefault();
+              execCmd(e.target.textContent);
+              e.target.textContent = '> ';
+              setCaret(e.target);
+            }
+          };
         }
       }
     }]

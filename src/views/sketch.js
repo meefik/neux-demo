@@ -17,26 +17,31 @@ export default function () {
         max: 100
       },
       on: {
-        change: (e) => {
-          state.size = parseInt(e.target.value || 0);
+        change () {
+          return (e) => {
+            state.size = parseInt(e.target.value || 0);
+          };
         }
       }
     }, {
       className: css.matrix,
       style: {
-        gridTemplateColumns: () => Array(state.$size).fill('20px').join(' ')
+        gridTemplateColumns: () => Array(state.$size).fill('20px')
+          .join(' ')
       },
       children: () => {
         return state.$matrix.map(() => {
           return {
             className: css.cell,
             on: {
-              mouseenter: (e) => {
-                const el = e.target;
-                el.style.backgroundColor = randomHexColorString();
-                setTimeout(() => {
-                  el.style.backgroundColor = '';
-                }, 1000);
+              mouseenter () {
+                return (e) => {
+                  const el = e.target;
+                  el.style.backgroundColor = randomHexColorString();
+                  setTimeout(() => {
+                    el.style.backgroundColor = '';
+                  }, 1000);
+                };
               }
             }
           };
@@ -47,9 +52,10 @@ export default function () {
 }
 
 function createMatrix (size) {
-  return Array(size * size).fill(0).map(item => {
-    return {};
-  });
+  return Array(size * size).fill(0)
+    .map(() => {
+      return {};
+    });
 }
 
 function randomHexColorString () {

@@ -27,22 +27,24 @@ export default function () {
             className: css.cell,
             textContent: v,
             on: {
-              click: () => {
-                const sel = state.selected;
-                if (sel !== null && i !== sel &&
-                  ((sel === i - 1 && i % SIZE > 0) ||
-                  (sel === i + 1 && (i + 1) % SIZE > 0) ||
-                  sel === i + SIZE || sel === i - SIZE)) {
-                  const oldv = state.matrix[sel];
-                  const newv = state.matrix[i];
-                  state.matrix[i] = oldv;
-                  state.matrix[sel] = newv;
-                  state.selected = null;
-                  state.movies++;
-                  state.win = checkWin(state.matrix);
-                } else {
-                  state.selected = i;
-                }
+              click () {
+                return () => {
+                  const sel = state.selected;
+                  if (sel !== null && i !== sel
+                    && ((sel === i - 1 && i % SIZE > 0)
+                    || (sel === i + 1 && (i + 1) % SIZE > 0)
+                    || sel === i + SIZE || sel === i - SIZE)) {
+                    const oldv = state.matrix[sel];
+                    const newv = state.matrix[i];
+                    state.matrix[i] = oldv;
+                    state.matrix[sel] = newv;
+                    state.selected = null;
+                    state.movies++;
+                    state.win = checkWin(state.matrix);
+                  } else {
+                    state.selected = i;
+                  }
+                };
               }
             }
           };
@@ -62,8 +64,9 @@ function checkWin (arr) {
 }
 
 function createMatrix (size) {
-  const matrix = Array(size * size - 1).fill(0).map((v, i) => (i + 1));
-  matrix.sort(() => Math.random() < 0.5 ? -1 : 1);
+  const matrix = Array((size * size) - 1).fill(0)
+    .map((v, i) => (i + 1));
+  matrix.sort(() => (Math.random() < 0.5 ? -1 : 1));
   matrix.push('');
   return matrix;
 }

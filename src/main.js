@@ -36,31 +36,33 @@ createView({
     children: [{
       className: css.sidebar,
       children: [{
-        view: Logo,
+        node: Logo,
         classList: [css.logo]
       }, {
         className: css.rows,
         tagName: 'nav',
-        children: Object.keys(views).map(view => {
+        children: Object.keys(views).map((view) => {
           return {
             tagName: 'a',
             href: `#${view}`,
             style: {
-              color: () => router.$path === view ? 'red' : ''
+              color: () => (router.$path === view ? 'red' : '')
             },
             textContent: () => l10n.t(`menu.${view}`)
           };
         })
       }, {
         className: css.footer,
-        children: l10n.locales.map(lang => {
+        children: l10n.locales.map((lang) => {
           return {
             tagName: 'button',
-            className: () => l10n.$lang === lang ? css.active : '',
+            className: () => (l10n.$lang === lang ? css.active : ''),
             textContent: () => l10n.t('language', lang),
             on: {
               click: () => {
-                l10n.lang = lang;
+                return () => {
+                  l10n.lang = lang;
+                };
               }
             }
           };
@@ -73,9 +75,8 @@ createView({
         textContent: () => l10n.t(`menu.${router.$path}`) || l10n.t('notfound.title')
       }, {
         children: () => {
-          return {
-            view: views[router.$path] || NotFound
-          };
+          const view = views[router.$path] || NotFound;
+          return [view()];
         }
       }]
     }]
