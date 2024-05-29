@@ -75,6 +75,7 @@ createView({
         textContent: () => l10n.t(`menu.${router.$path}`) || l10n.t('notfound.title')
       }, {
         children: () => {
+          router.query = {};
           const view = views[router.$path] || NotFound;
           return [view()];
         }
