@@ -36,7 +36,7 @@ createView({
     children: [{
       className: css.sidebar,
       children: [{
-        node: Logo,
+        outerHTML: Logo,
         classList: [css.logo]
       }, {
         className: css.rows,
